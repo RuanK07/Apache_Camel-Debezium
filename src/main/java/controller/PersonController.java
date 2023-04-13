@@ -8,10 +8,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import Repository.PersonRepository;
 import model.Person;
 
+@RestController
+@RequestMapping("people")
 public class PersonController {
 	
 	@Autowired
@@ -21,7 +25,9 @@ public class PersonController {
 	public ResponseEntity<?> get() { return ResponseEntity.ok(repository.findAll());}
 	
 	@PostMapping
-	public ResponseEntity<?> post(@RequestBody Person person) { return ResponseEntity.ok(repository.save(person)); }
+	public ResponseEntity<?> post(@RequestBody Person person) { 
+		return ResponseEntity.ok(repository.save(person));
+	}
 	
 	@PutMapping("{id}")
 	public ResponseEntity<?> put(@PathVariable Long id, @RequestBody Person person) {
